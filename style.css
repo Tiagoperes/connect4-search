@@ -30,12 +30,148 @@ header {
   font-weight: normal;
 }
 
-.search-method {
+.settings {
   display: inline-block;
   width: 50%;
-  font-size: 14px;
   text-align: right;
+}
+
+.ai-options {
+  display: inline-block;
+  font-size: 14px;
   vertical-align: middle;
+  list-style: none;
+  padding: 6px 50px 6px 20px;
+  margin: 0;
+  background-color: #353535;
+  border-radius: 30px;
+  text-align: left;
+  position: relative;
+}
+
+.ai-options li {
+  display: inline-block;
+}
+
+.ai-options .lookahead {
+  margin: 0 30px;
+}
+
+.ai-options label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.ai-options .checkbox {
+  display: inline-block;
+  width: 25px;
+  height: 10px;
+  vertical-align: middle;
+  border-radius: 8px;
+  background-color: #191919;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.15s linear;
+}
+
+.ai-options .checkbox:before {
+  content: '';
+  background-color: #6A6A6A;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  left: -3px;
+  top: -2px;
+  transition: background-color 0.15s linear, left 0.15s linear;
+}
+
+.ai-options .checkbox.active {
+  background-color: #017057;
+}
+
+.ai-options .checkbox.active:before {
+  background-color: #02B992;
+  left: 13px;
+}
+
+.ai-options .number-selector {
+  display: inline-block;
+  width: 10px;
+  height: 16px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #6A6A6A;
+  border-radius: 3px;
+}
+
+.ai-options .number-selector .up {
+  cursor: pointer;
+  display: block;
+  padding: 3px 2px 2px;
+}
+
+.ai-options .number-selector .down {
+  cursor: pointer;
+  display: block;
+  padding: 2px 2px 3px;
+}
+
+.ai-options .number-selector .up:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid #FFF;
+  display: block;
+}
+
+.ai-options .number-selector .down:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid #FFF;
+  display: block;
+}
+
+.ai-options .select-arrow {
+  width: 16px;
+  height: 16px;
+  background-color: #6A6A6A;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  position: relative;
+}
+
+.ai-options .select-arrow:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #FFF;
+  position: absolute;
+  top: 7px;
+  left: 4px;
+}
+
+.ai-options .apply-settings {
+  border: none;
+  outline: none;
+  background-color: #02B992;
+  border-radius: 50%;
+  color: #FFF;
+  width: 29px;
+  height: 29px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
 }
 
 #game {
@@ -204,6 +340,11 @@ header {
 
 #resultPanel {
   text-align: center;
+  display: none;
+}
+
+#resultPanel.visible {
+  display: block;
 }
 
 .result {
@@ -212,18 +353,21 @@ header {
   padding: 10px 25px;
   border-radius: 8px;
   color: #FFF;
-  display: inline-block;
+  display: none;
 }
 
-.result.win {
+#resultPanel.win .result.win {
+  display: inline-block;
   background-color: #2B9A48;
 }
 
-.result.lose {
+#resultPanel.lose .result.lose {
+  display: inline-block;
   background-color: #B72121;
 }
 
-.result.draw {
+#resultPanel.draw .result.draw {
+  display: inline-block;
   background-color: #D09A04;
 }
 

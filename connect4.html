@@ -10,11 +10,30 @@
 <body>
   <header>
     <h1 class="title">Connect4</h1>
-    <div class="search-method">
-      <select id="searchMethodSelector">
-        <option value="minimax">Minimax</option>
-        <option value="alphaBeta">Alpha-Beta Hardsoft</option>
-      </select>
+    <div class="settings">
+      <ul class="ai-options">
+        <li>
+          <label>Transposition</label>
+          <div class="checkbox"></div>
+        </li>
+
+        <li class="lookahead">
+          <label id="lookahead">Lookahead 6</label>
+          <div class="number-selector">
+            <span class="up"></span>
+            <span class="down"></span>
+          </div>
+        </li>
+
+        <li>
+          <label>Minimax</label>
+          <span class="select-arrow"></span>
+        </li>
+
+        <li>
+          <button class="apply-settings"><i class="fa fa-check"></i></button>
+        </li>
+      </ul>
     </div>
   </header>
 
@@ -89,12 +108,27 @@
     <ul id="searchTree"></ul>
   </section>
 
+  <!-- libs -->
   <script src="lib/lodash.js"></script>
   <script src="lib/jquery.js"></script>
+  <!-- search algorithms -->
   <script src="search-algorithms/minimax.js"></script>
   <script src="search-algorithms/alpha-beta-hardsoft.js"></script>
-  <script src="transposition-table.js"></script>
-  <script src="tic-tac-toe.service.js"></script>
-  <script src="tic-tac-toe.controller.js"></script>
+  <!-- connect4 services -->
+  <script src="connect4/module.js"></script>
+  <script src="connect4/config.js"></script>
+  <script src="connect4/transposition-table.js"></script>
+  <script src="connect4/evaluator.js"></script>
+  <script src="connect4/node.js"></script>
+  <script src="connect4/game.js"></script>
+  <script src="connect4/evaluator.js"></script>
+  <script src="connect4/verifier-automaton.js"></script>
+  <!-- connect4 controllers -->
+  <script src="interface/module.js"></script>
+  <script src="interface/board-highlighter.js"></script>
+  <script src="interface/search-tree.js"></script>
+  <script src="interface/symbol-converter.js"></script>
+  <script src="interface/game-settings.js"></script>
+  <script src="interface/game-board.js"></script>
 </body>
 </html>
