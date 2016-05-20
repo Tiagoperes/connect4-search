@@ -18,20 +18,21 @@
         </li>
 
         <li class="lookahead">
-          <label id="lookahead">Lookahead 6</label>
+          <label id="lookahead"></label>
           <div class="number-selector">
             <span class="up"></span>
             <span class="down"></span>
           </div>
         </li>
 
-        <li>
-          <label>Minimax</label>
+        <li class="select">
+          <label id="searchMethod"></label>
           <span class="select-arrow"></span>
+          <ul class="options"></ul>
         </li>
 
         <li>
-          <button class="apply-settings"><i class="fa fa-check"></i></button>
+          <button class="apply-settings" disabled><i class="fa fa-check"></i></button>
         </li>
       </ul>
     </div>
@@ -100,7 +101,7 @@
       <p class="result lose">You lose!</p>
       <p class="result draw">It's a draw!</p>
       <br>
-      <button id="restart">Restart</button>
+      <button id="restart" class="btn-restart"><i class="fa fa-repeat"></i>Restart</button>
     </div>
   </section>
 

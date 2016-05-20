@@ -8,7 +8,7 @@
    * "digit" at the right. Each position in the board assumes 0 when null,
    * 1 when AI mark and 2 otherwise.*/
   function getHash(line, column, player) {
-    var exp = line * conf.COLUMNS + column,
+    var exp = line * conf.BOARD_COLUMNS + column,
         multiplier = player === conf.AI_MARK ? 1 : 2;
 
     return multiplier * Math.pow(3, exp);

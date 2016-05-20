@@ -61,6 +61,7 @@ header {
   display: inline-block;
   vertical-align: middle;
   margin-right: 6px;
+  cursor: inherit;
 }
 
 .ai-options .checkbox {
@@ -148,6 +149,48 @@ header {
   position: relative;
 }
 
+.ai-options .select {
+  position: relative;
+  cursor: pointer;
+}
+
+.ai-options .select.show-options .options {
+  height: 68px;
+}
+
+.ai-options .select .options {
+  margin: 0 0 0 -61px;
+  padding: 0;
+  list-style: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  top: 23px;
+  left: 50%;
+  box-shadow: 2px 2px 2px -1px rgba(0,0,0,0.2);
+  height: 0;
+  transition: height 0.2s linear;
+}
+
+.ai-options .select .options li {
+  padding: 10px 0;
+  background-color: #353535;
+  font-size: 12px;
+  width: 122px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.15s linear;
+}
+
+.ai-options .select .options li:hover {
+  background-color: #4f4f4f !important;
+}
+
+.ai-options .select .options li:nth-child(odd) {
+  background-color: #3F3F3F;
+}
+
 .ai-options .select-arrow:before {
   content: '';
   width: 0;
@@ -172,6 +215,14 @@ header {
   top: 0;
   right: 0;
   text-align: center;
+  transition: background-color 0.15s linear, color 0.15s linear;
+  cursor: pointer;
+}
+
+.ai-options .apply-settings[disabled] {
+  color: #D3D3D3;
+  background-color: #6A6A6A;
+  cursor: default;
 }
 
 #game {
@@ -369,6 +420,21 @@ header {
 #resultPanel.draw .result.draw {
   display: inline-block;
   background-color: #D09A04;
+}
+
+.btn-restart {
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: #02a683;
+  padding: 8px 16px;
+  color: #FFF;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-restart .fa {
+  margin-right: 8px;
 }
 
 .time-taken {

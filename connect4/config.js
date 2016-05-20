@@ -9,6 +9,7 @@
       BOARD_LINES: 6,
       BOARD_COLUMNS: 7,
       OBJECTIVE: 4,
+      SEARCH_AGENTS: {minimax: 'Minimax', alphaBetaHardSoft: 'Alpha-beta HS', alphaBetaFailSoft: 'Alpha-beta FS'},
       useTransposition: false,
       searchAgent: 'minimax'
     }
