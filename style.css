@@ -235,6 +235,16 @@ header {
   padding: 60px 0;
 }
 
+.wait {
+  width: 430px;
+  height: 370px;
+  position: absolute;
+  left: 60px;
+  top: 50px;
+  cursor: wait;
+  display: none;
+}
+
 .board {
   border-spacing: 4px;
   margin: 0 auto;
@@ -389,6 +399,10 @@ header {
   background-color: #D22BA6;
 }
 
+.node-transposition .fa {
+  background-color: #a86c21;
+}
+
 #resultPanel {
   text-align: center;
   display: none;
@@ -437,7 +451,7 @@ header {
   margin-right: 8px;
 }
 
-.time-taken {
+.bottom-info {
   position: fixed;
   bottom: 6px;
   right: 6px;
@@ -448,6 +462,14 @@ header {
   padding: 4px 12px;
 }
 
-.time-taken .fa {
+.bottom-info .fa {
   margin-right: 4px;
+}
+
+.bottom-info.time-taken {
+  right: 6px;
+}
+
+.bottom-info.table-size {
+  right: 88px;
 }

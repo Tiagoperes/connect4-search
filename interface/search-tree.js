@@ -73,8 +73,20 @@
     return '';
   }
 
+  function getTranspositionData(treeNode) {
+    if (treeNode.transposition) {
+      return '<div class="node-data-item node-transposition"><i class="fa fa-table"></i>transposition</div>';
+    }
+    return '';
+  }
+
   function getNodeData(treeNode) {
-    return '<div class="node-data">' + getEvaluationData(treeNode) + getMinMaxData(treeNode) + getCutData(treeNode) + '</div>';
+    return '<div class="node-data">' +
+      getEvaluationData(treeNode) +
+      getMinMaxData(treeNode) +
+      getCutData(treeNode) +
+      getTranspositionData(treeNode) +
+      '</div>';
   }
 
   function printTreeNode(parentList, treeNode, isChosen) {
@@ -97,19 +109,36 @@
   function printTimeTaken(timeTaken) {
     var icon = '<i class="fa fa-clock-o"></i>',
         time = formatTime(timeTaken),
-        timeDiv = '<div class="time-taken">' + icon + time + '</div>';
+        timeDiv = '<div class="bottom-info time-taken">' + icon + time + '</div>';
 
     $('#searchTree').append(timeDiv);
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + 'B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(2) + 'kB';
+    return (bytes / 1048576).toFixed(2) + 'mB';
+  }
+
+  function printTranspositionTableSize(transpositionTableBytes) {
+    var icon, size, sizeDiv;
+    if (transpositionTableBytes) {
+      icon = '<i class="fa fa-table"></i>';
+      size = formatBytes(transpositionTableBytes);
+      sizeDiv = '<div class="bottom-info table-size">' + icon + size + '</div>';
+      $('#searchTree').append(sizeDiv);
+    }
   }
 
   function eraseSearchTree() {
     $('#searchTree').html('');
   }
 
-  function printSearchTree(node, time) {
+  function printSearchTree(node, time, transpositionTableBytes) {
     eraseSearchTree();
     printTreeNode($('#searchTree'), node.parent);
     printTimeTaken(time.end - time.start);
+    printTranspositionTableSize(transpositionTableBytes);
   }
 
   connect4.controller.searchTree = {

@@ -5,14 +5,39 @@
 
   search.Minimax = function (evaluate, getChildren, maxDepth, transpositionTable) {
 
+    function getMaxDepth(node) {
+      if (_.isEmpty(node.children)) {
+        return 0;
+      }
+      return 1 + _.max(_.forEach(node.children, getMaxDepth));
+    }
+
     function calculateBestChild(children, depth, compare) {
-      return compare(children, function (child) {
+      var best = compare(children, function (child) {
         child.evaluation = search(child, depth).evaluation;
-        if (transpositionTable) {
-          transpositionTable.set(child.hash, child.evaluation);
-        }
         return child.evaluation;
       });
+      return _.maxBy(_.filter(children, {evaluation: best.evaluation}), getMaxDepth);
+    }
+
+    function evaluateLeafAccordingToTranspositionTable(node) {
+      node.evaluation = transpositionTable.get(node.hash);
+      if (!node.evaluation) {
+        node.evaluation = evaluate(node);
+        node.transposition = false;
+        transpositionTable.set(node.hash, node.evaluation);
+      } else {
+        node.transposition = true;
+      }
+      return node;
+    }
+
+    function evaluateLeaf(node) {
+      if (transpositionTable) {
+        return evaluateLeafAccordingToTranspositionTable(node);
+      }
+      node.evaluation = evaluate(node);
+      return node;
     }
 
     function search(node, depth) {
@@ -21,17 +46,8 @@
           isDepthValid = depth < maxDepth,
           isMaxLevel = depth % 2 == 0;
 
-      if (transpositionTable && depth > 0) {
-        let evaluation = transpositionTable.get(node.state, node.hash);
-        if (evaluation) {
-          node.evaluation = evaluation;
-          return node;
-        }
-      }
-
       if (isLeaf || !isDepthValid) {
-        node.evaluation = evaluate(node);
-        return node;
+        return evaluateLeaf(node);
       }
 
       if (isMaxLevel) {

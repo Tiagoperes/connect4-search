@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  const CHAR_BYTES = 2,
+        NUMBER_BYTES = 8;
+
   var conf = connect4.config;
 
   /* The hash here represents the board (state) in the following format:
@@ -29,9 +32,17 @@
       table[hash] = value;
     };
 
-    this.get = function (state, hash) {
+    this.get = function (hash) {
       return table[hash];
     };
+
+    this.getSizeInBytes = function() {
+      var keys = _.keys(table);
+      var keysSize = _.reduce(keys, function (sum, key) {
+        return sum + key.length * CHAR_BYTES;
+      }, 0);
+      return keysSize + NUMBER_BYTES * keys.length;
+    }
   }
 
   TranspositionTable.applyMoveToHash = applyMoveToHash;

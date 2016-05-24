@@ -30,8 +30,11 @@
   }
 
   function getSearchAgent(evaluator) {
-    var transpositionTable = conf.useTransposition ? new connect4.TranspositionTable() : undefined;
-    return searchAgents[conf.searchAgent](evaluator, transpositionTable);
+    var transpositionTable = conf.useTransposition ? new connect4.TranspositionTable() : undefined,
+        agent = searchAgents[conf.searchAgent](evaluator, transpositionTable);
+
+    agent.traspositionTable = transpositionTable;
+    return agent;
   }
 
   function isActionAllowed(state, action) {
@@ -40,7 +43,8 @@
 
   function Game() {
     var evaluator = new connect4.Evaluator(),
-        search = getSearchAgent(evaluator).search,
+        searchAgent = getSearchAgent(evaluator),
+        search = searchAgent.search,
         currentStateNode = new connect4.Node(),
         Node = connect4.Node,
         ai = conf.AI_MARK,
@@ -73,6 +77,10 @@
     this.getEndGameData = function () {
       return endGameData;
     };
+
+    this.getTranspositionTableSizeInBytes = function() {
+      return searchAgent.traspositionTable.getSizeInBytes();
+    }
   }
 
   connect4.Game = Game;

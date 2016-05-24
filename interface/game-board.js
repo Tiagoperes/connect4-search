@@ -27,11 +27,11 @@
   }
 
   function wait() {
-    $('body, #game td').css('cursor', 'wait');
+    $('body .wait').show();
   }
 
   function ready() {
-    $('body, #game td').removeAttr('style');
+    $('body .wait').hide();
   }
 
   function afterHumanMove(time) {
@@ -41,9 +41,11 @@
   }
 
   function afterAIMove(time) {
+    var tableSize = conf.useTransposition ? game.getTranspositionTableSizeInBytes() : undefined;
     time.end = new Date();
     printState();
-    connect4.controller.searchTree.print(game.getCurrentStateNode(), time);
+    connect4.controller.searchTree.print(game.getCurrentStateNode(), time, tableSize);
+    window.state = game.getCurrentStateNode();
     verifyEndGame();
     ready();
   }
@@ -52,7 +54,8 @@
     $('#game td').click(function (ev) {
       var column = $(ev.target).attr('data-index').split(',')[1],
           time = {};
-
+      window.jogadas = window.jogadas || [];
+      window.jogadas.push(column);
       game.makeMove(column, _.partial(afterHumanMove, time), _.partial(afterAIMove, time));
     });
   }
